@@ -5,7 +5,7 @@ export default function Navbar() {
     <div className="navbar bg-base-100 shadow-md px-6">
       {/* Left */}
       <div className="flex-1">
-        <Link href="/" className="text-xl font-bold">
+        <Link href="/" className="text-xl font-bold text-blue-700">
           SkillSphere
         </Link>
       </div>
