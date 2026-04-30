@@ -2,38 +2,39 @@
 
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-export default function LoginPage() {
+export default function RegisterPage() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const { login } = useAuth();
   const router = useRouter();
-  const searchParams = useSearchParams();
 
-  const handleLogin = (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
     setError("");
 
     // Basic validation
-    if (!email || !password) {
+    if (!name || !email || !password) {
       setError("Please fill in all fields.");
       return;
     }
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters.");
+      return;
+    }
 
-    // Get the name from email (everything before @)
-    // e.g. "john.doe@gmail.com" → "John Doe"
-    const namePart = email.split("@")[0];
-    const name = namePart
-      .replace(/[._-]/g, " ")           // replace dots/dashes with spaces
-      .replace(/\b\w/g, (c) => c.toUpperCase()); // capitalize each word
+    // Capitalize the name properly
+    // e.g. "john doe" → "John Doe"
+    const formattedName = name
+      .trim()
+      .replace(/\b\w/g, (c) => c.toUpperCase());
 
-    login({ name, email });
-
-    const redirect = searchParams.get("redirect");
-    router.push(redirect || "/");
+    login({ name: formattedName, email });
+    router.push("/");
   };
 
   return (
@@ -43,15 +44,26 @@ export default function LoginPage() {
         {/* Header */}
         <div style={styles.header}>
           <div style={styles.logo}>🎓</div>
-          <h2 style={styles.title}>Welcome Back</h2>
-          <p style={styles.subtitle}>Log in to continue learning</p>
+          <h2 style={styles.title}>Create Account</h2>
+          <p style={styles.subtitle}>Join thousands of learners today</p>
         </div>
 
         {/* Error message */}
         {error && <p style={styles.error}>⚠️ {error}</p>}
 
         {/* Form */}
-        <form onSubmit={handleLogin} style={styles.form}>
+        <form onSubmit={handleRegister} style={styles.form}>
+
+          <div style={styles.field}>
+            <label style={styles.label}>Full Name</label>
+            <input
+              type="text"
+              placeholder="John Doe"
+              style={styles.input}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
 
           <div style={styles.field}>
             <label style={styles.label}>Email Address</label>
@@ -68,7 +80,7 @@ export default function LoginPage() {
             <label style={styles.label}>Password</label>
             <input
               type="password"
-              placeholder="Enter your password"
+              placeholder="At least 6 characters"
               style={styles.input}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -76,15 +88,15 @@ export default function LoginPage() {
           </div>
 
           <button type="submit" style={styles.button}>
-            Log In
+            Create Account
           </button>
 
         </form>
 
         {/* Footer */}
         <p style={styles.footerText}>
-          Don't have an account?{" "}
-          <Link href="/register" style={styles.link}>Register here</Link>
+          Already have an account?{" "}
+          <Link href="/login" style={styles.link}>Log in here</Link>
         </p>
 
       </div>
@@ -159,7 +171,6 @@ const styles = {
     border: "1.5px solid #e5e7eb",
     fontSize: "0.95rem",
     outline: "none",
-    transition: "border 0.2s",
     color: "#1f2937",
   },
   button: {
@@ -173,7 +184,6 @@ const styles = {
     borderRadius: "10px",
     cursor: "pointer",
     boxShadow: "0 4px 12px rgba(99,102,241,0.3)",
-    transition: "opacity 0.2s",
   },
   footerText: {
     textAlign: "center",
