@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "title": "Complete Web Development Bootcamp",
+    "instructor": "John Doe",
+    "duration": "20 hours",
+    "rating": 4.8,
+    "level": "Beginner",
+    "description": "Learn full-stack web development from scratch.",
+    "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
+    "category": "Development"
+  },
+  {
+    "id": 2,
+    "title": "UI/UX Design Masterclass",
+    "instructor": "Jane Smith",
+    "duration": "15 hours",
+    "rating": 4.7,
+    "level": "Intermediate",
+    "description": "Design beautiful and user-friendly interfaces.",
+    "image": "https://images.unsplash.com/photo-1559028012-481c04fa702d",
+    "category": "Design"
+  },
+  {
+    "id": 3,
+    "title": "Digital Marketing Essentials",
+    "instructor": "David Lee",
+    "duration": "10 hours",
+    "rating": 4.6,
+    "level": "Beginner",
+    "description": "Master SEO, social media, and online marketing.",
+    "image": "https://images.unsplash.com/photo-1557838923-2985c318be48",
+    "category": "Marketing"
+  }
+]

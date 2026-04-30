@@ -1,7 +1,9 @@
+import HeroSection from "@/components/HeroSection";
+
 export default function Home() {
   return (
-    <div className="p-10">
-      <button className="btn btn-primary">Test Button</button>
+    <div>
+      <HeroSection />
     </div>
   );
 }
