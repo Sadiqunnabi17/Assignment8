@@ -1,25 +1,52 @@
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 import courses from "@/data/courses.json";
 
-export default async function CourseDetails({ params }) {
-  const resolvedParams = await params; // safe handling
-  const id = resolvedParams.id;
+export default function CourseDetails({ params }) {
+  const router = useRouter();
+  const { user } = useAuth();
 
+  // Handle params safely
+  const id = params?.id;
+
+  // Find course
   const course = courses.find((c) => c.id === Number(id));
 
+  // 🔐 Redirect if not logged in
+  useEffect(() => {
+    if (!user) {
+      router.push(`/login?redirect=/courses/${id}`);
+    }
+  }, [user, router, id]);
+
+  // While redirecting or loading
+  if (!user) {
+    return <div className="p-6 text-center">Redirecting...</div>;
+  }
+
+  // If course not found
   if (!course) {
     return <div className="p-6 text-center">Course not found.</div>;
   }
 
   return (
     <div className="p-6 max-w-3xl mx-auto">
+      {/* Image */}
       <img
         src={course.image}
         alt={course.title}
         className="w-full h-64 object-cover rounded-xl mb-6"
       />
 
-      <h1 className="text-3xl font-bold mb-2">{course.title}</h1>
+      {/* Title */}
+      <h1 className="text-3xl font-bold mb-2">
+        {course.title}
+      </h1>
 
+      {/* Meta */}
       <p className="text-gray-500 mb-1">
         Instructor: {course.instructor}
       </p>
@@ -33,12 +60,17 @@ export default async function CourseDetails({ params }) {
         Rating: ⭐ {course.rating}
       </p>
 
-      <p className="text-lg">{course.description}</p>
+      {/* Description */}
+      <p className="text-lg mb-6">
+        {course.description}
+      </p>
 
-      <div className="mt-6">
+      {/* Curriculum */}
+      <div>
         <h2 className="text-xl font-semibold mb-2">
           Course Curriculum
         </h2>
+
         <ul className="list-disc pl-6">
           <li>Introduction</li>
           <li>Core Concepts</li>
