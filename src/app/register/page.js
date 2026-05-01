@@ -58,7 +58,7 @@ export default function RegisterPage() {
             <label style={styles.label}>Full Name</label>
             <input
               type="text"
-              placeholder="John Doe"
+              placeholder="Your Full Name"
               style={styles.input}
               value={name}
               onChange={(e) => setName(e.target.value)}

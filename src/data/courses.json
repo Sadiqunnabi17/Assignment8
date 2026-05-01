@@ -6,8 +6,8 @@
     "duration": "20 hours",
     "rating": 4.8,
     "level": "Beginner",
-    "description": "Learn full-stack web development from scratch.",
-    "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
+    "description": "Learn full-stack web development from scratch including HTML, CSS, JavaScript and React.",
+    "image": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&fit=crop",
     "category": "Development"
   },
   {
@@ -17,8 +17,8 @@
     "duration": "15 hours",
     "rating": 4.7,
     "level": "Intermediate",
-    "description": "Design beautiful and user-friendly interfaces.",
-    "image": "https://images.unsplash.com/photo-1559028012-481c04fa702d",
+    "description": "Design beautiful and user-friendly interfaces using Figma and modern design principles.",
+    "image": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&fit=crop",
     "category": "Design"
   },
   {
@@ -28,8 +28,107 @@
     "duration": "10 hours",
     "rating": 4.6,
     "level": "Beginner",
-    "description": "Master SEO, social media, and online marketing.",
-    "image": "https://images.unsplash.com/photo-1557838923-2985c318be48",
+    "description": "Master SEO, social media marketing, email campaigns and online advertising.",
+    "image": "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=600&fit=crop",
     "category": "Marketing"
+  },
+  {
+    "id": 4,
+    "title": "Python for Data Science",
+    "instructor": "Sarah Johnson",
+    "duration": "25 hours",
+    "rating": 4.9,
+    "level": "Intermediate",
+    "description": "Analyze data, build models and create visualizations using Python, Pandas and NumPy.",
+    "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&fit=crop",
+    "category": "Data Science"
+  },
+  {
+    "id": 5,
+    "title": "Mobile App Development with React Native",
+    "instructor": "Chris Evans",
+    "duration": "18 hours",
+    "rating": 4.7,
+    "level": "Intermediate",
+    "description": "Build cross-platform iOS and Android apps using React Native and Expo.",
+    "image": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&fit=crop",
+    "category": "Development"
+  },
+  {
+    "id": 6,
+    "title": "Graphic Design for Beginners",
+    "instructor": "Emily Rose",
+    "duration": "12 hours",
+    "rating": 4.5,
+    "level": "Beginner",
+    "description": "Learn graphic design fundamentals using Adobe Photoshop and Illustrator.",
+    "image": "https://images.unsplash.com/photo-1572044162444-ad60f128bdea?w=600&fit=crop",
+    "category": "Design"
+  },
+  {
+    "id": 7,
+    "title": "Machine Learning A-Z",
+    "instructor": "Dr. Alan Turing",
+    "duration": "30 hours",
+    "rating": 4.9,
+    "level": "Advanced",
+    "description": "Master machine learning algorithms, neural networks and AI model deployment.",
+    "image": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&fit=crop",
+    "category": "Data Science"
+  },
+  {
+    "id": 8,
+    "title": "Business Communication Skills",
+    "instructor": "Laura Kim",
+    "duration": "8 hours",
+    "rating": 4.4,
+    "level": "Beginner",
+    "description": "Improve your professional writing, presentation and interpersonal communication skills.",
+    "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&fit=crop",
+    "category": "Business"
+  },
+  {
+    "id": 9,
+    "title": "Cybersecurity Fundamentals",
+    "instructor": "Mark Shield",
+    "duration": "22 hours",
+    "rating": 4.8,
+    "level": "Intermediate",
+    "description": "Learn ethical hacking, network security and how to protect systems from cyber threats.",
+    "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&fit=crop",
+    "category": "Security"
+  },
+  {
+    "id": 10,
+    "title": "Photography Masterclass",
+    "instructor": "Nina Patel",
+    "duration": "14 hours",
+    "rating": 4.6,
+    "level": "Beginner",
+    "description": "Master your camera settings, composition and photo editing to take stunning photos.",
+    "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=600&fit=crop",
+    "category": "Photography"
+  },
+  {
+    "id": 11,
+    "title": "Financial Planning & Investing",
+    "instructor": "Robert Cash",
+    "duration": "10 hours",
+    "rating": 4.7,
+    "level": "Beginner",
+    "description": "Learn budgeting, stock market investing and how to build long-term wealth.",
+    "image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&fit=crop",
+    "category": "Finance"
+  },
+  {
+    "id": 12,
+    "title": "Advanced JavaScript & Node.js",
+    "instructor": "Tom Richards",
+    "duration": "28 hours",
+    "rating": 4.8,
+    "level": "Advanced",
+    "description": "Deep dive into JavaScript ES6+, async programming, REST APIs and Node.js backend development.",
+    "image": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=600&fit=crop",
+    "category": "Development"
   }
 ]

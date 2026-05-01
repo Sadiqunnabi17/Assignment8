@@ -7,27 +7,32 @@ import courses from "@/data/courses.json";
 
 export default function CourseDetails({ params }) {
   const router = useRouter();
-  const { user } = useAuth();
+  const { user, loading } = useAuth(); // 👈 include loading
 
   // Handle params safely
-  const id = params?.id;
+  const id = Number(params?.id);
 
   // Find course
-  const course = courses.find((c) => c.id === Number(id));
+  const course = courses.find((c) => c.id === id);
 
-  // 🔐 Redirect if not logged in
+  // 🔐 Redirect only AFTER loading finishes
   useEffect(() => {
-    if (!user) {
+    if (!loading && !user) {
       router.push(`/login?redirect=/courses/${id}`);
     }
-  }, [user, router, id]);
+  }, [user, loading, router, id]);
 
-  // While redirecting or loading
+  // ⏳ Wait for auth check (prevents hydration error)
+  if (loading) {
+    return <div className="p-6 text-center">Loading...</div>;
+  }
+
+  // ⛔ Not logged in (temporary state before redirect)
   if (!user) {
     return <div className="p-6 text-center">Redirecting...</div>;
   }
 
-  // If course not found
+  // ❌ Course not found
   if (!course) {
     return <div className="p-6 text-center">Course not found.</div>;
   }

@@ -1,3 +1,5 @@
+import { Fragment } from "react";
+
 export default function StatsSection() {
   const stats = [
     { icon: "🎓", number: "12,000+", label: "Students Enrolled" },
@@ -74,7 +76,7 @@ export default function StatsSection() {
       <section className="stats-section">
         <div className="stats-inner">
           {stats.map((stat, index) => (
-            <>
+            <Fragment key={stat.label}>
               <div className="stat-item" key={stat.label}>
                 <div className="stat-icon">{stat.icon}</div>
                 <div className="stat-number">{stat.number}</div>
@@ -85,7 +87,7 @@ export default function StatsSection() {
               {index < stats.length - 1 && (
                 <div className="stat-divider" key={`divider-${index}`} />
               )}
-            </>
+            </Fragment>
           ))}
         </div>
       </section>

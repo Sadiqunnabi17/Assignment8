@@ -5,12 +5,12 @@ export default function TopInstructors() {
         🏆 Top Instructors
       </h2>
 
-      <div className="grid md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
 
         <div className="text-center">
           <img
-            src="https://i.ibb.co.com/5Y0Zb1c/instructor1.jpg"
-            className="w-24 h-24 mx-auto rounded-full"
+            src="https://randomuser.me/api/portraits/men/32.jpg"
+            className="w-24 h-24 mx-auto rounded-full object-cover"
           />
           <h3 className="mt-2 font-semibold">John Doe</h3>
           <p className="text-sm">Web Development</p>
@@ -18,8 +18,8 @@ export default function TopInstructors() {
 
         <div className="text-center">
           <img
-            src="https://i.ibb.co.com/5Y0Zb1c/instructor1.jpg"
-            className="w-24 h-24 mx-auto rounded-full"
+            src="https://randomuser.me/api/portraits/women/44.jpg"
+            className="w-24 h-24 mx-auto rounded-full object-cover"
           />
           <h3 className="mt-2 font-semibold">Jane Smith</h3>
           <p className="text-sm">UI/UX Design</p>
@@ -27,8 +27,8 @@ export default function TopInstructors() {
 
         <div className="text-center">
           <img
-            src="https://i.ibb.co.com/5Y0Zb1c/instructor1.jpg"
-            className="w-24 h-24 mx-auto rounded-full"
+            src="https://randomuser.me/api/portraits/men/75.jpg"
+            className="w-24 h-24 mx-auto rounded-full object-cover"
           />
           <h3 className="mt-2 font-semibold">David Lee</h3>
           <p className="text-sm">Marketing</p>
@@ -36,8 +36,8 @@ export default function TopInstructors() {
 
         <div className="text-center">
           <img
-            src="https://i.ibb.co.com/5Y0Zb1c/instructor1.jpg"
-            className="w-24 h-24 mx-auto rounded-full"
+            src="https://randomuser.me/api/portraits/women/68.jpg"
+            className="w-24 h-24 mx-auto rounded-full object-cover"
           />
           <h3 className="mt-2 font-semibold">Sarah Khan</h3>
           <p className="text-sm">Data Science</p>

@@ -53,6 +53,12 @@ export default function LoginPage() {
         {/* Form */}
         <form onSubmit={handleLogin} style={styles.form}>
 
+          {!email && (
+            <div className="alert alert-error mb-3">
+                Please enter email
+            </div>
+          )}
+          
           <div style={styles.field}>
             <label style={styles.label}>Email Address</label>
             <input

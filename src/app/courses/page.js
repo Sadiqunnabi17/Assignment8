@@ -24,7 +24,7 @@ export default function CoursesPage() {
         onChange={(e) => setSearch(e.target.value)}
       />
 
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
         {filteredCourses.map(course => (
           <CourseCard key={course.id} course={course} />
         ))}
