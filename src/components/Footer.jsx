@@ -56,7 +56,7 @@ export default function Footer() {
               Our Impact
             </p>
 
-            <div className="flex justify-center md:justify-start gap-8 mb-6">
+            <div className="flex justify-center md:justify-start gap-4 mb-6">
               <div>
                 <span className="block text-white text-lg font-bold">12k+</span>
                 <span className="text-xs text-gray-400">Students</span>
@@ -75,14 +75,14 @@ export default function Footer() {
               Follow Us
             </p>
 
-            <div className="flex justify-center md:justify-start gap-3">
-              <a className="w-9 h-9 flex items-center justify-center rounded-md border border-white/10 bg-white/5 text-gray-400 hover:bg-indigo-400/20 hover:text-indigo-300 transition">
+            <div className="flex justify-center md:justify-start gap-2">
+              <a className="w-7 h-7 flex items-center justify-center rounded-md border border-white/10 bg-white/5 text-gray-400 hover:bg-indigo-400/20 hover:text-indigo-300 transition">
                 <FaXTwitter size={16} />
               </a>
-              <a className="w-9 h-9 flex items-center justify-center rounded-md border border-white/10 bg-white/5 text-gray-400 hover:bg-indigo-400/20 hover:text-indigo-300 transition">
+              <a className="w-7 h-7 flex items-center justify-center rounded-md border border-white/10 bg-white/5 text-gray-400 hover:bg-indigo-400/20 hover:text-indigo-300 transition">
                 <FaLinkedinIn size={16} />
               </a>
-              <a className="w-9 h-9 flex items-center justify-center rounded-md border border-white/10 bg-white/5 text-gray-400 hover:bg-indigo-400/20 hover:text-indigo-300 transition">
+              <a className="w-7 h-7 flex items-center justify-center rounded-md border border-white/10 bg-white/5 text-gray-400 hover:bg-indigo-400/20 hover:text-indigo-300 transition">
                 <FaInstagram size={16} />
               </a>
             </div>
