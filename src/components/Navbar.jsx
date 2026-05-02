@@ -18,7 +18,7 @@ export default function Navbar() {
       <nav className="navbar-root">
         <div className="navbar-inner">
           {/* Logo */}
-          <Link href="/" className="navbar-logo">SkillSphere</Link>
+          <Link href="/" className="navbar-logo ">SkillSphere</Link>
 
           {/* Desktop Links */}
           <ul className="navbar-links">

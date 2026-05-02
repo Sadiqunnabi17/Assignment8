@@ -1,34 +1,48 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
+import { authClient } from "@/lib/auth-client";
 
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); // 👈 important
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-    setLoading(false);
+    // Fetch the current Better Auth session
+    authClient.getSession().then((session) => {
+      if (session?.data?.user) {
+        setUser({
+          name: session.data.user.name,
+          email: session.data.user.email,
+          photo: session.data.user.image,
+        });
+      } else {
+        setUser(null);
+      }
+      setLoading(false);
+    });
   }, []);
 
-  const login = ({ name, email }) => {
-    const userData = { name, email };
-    setUser(userData);
-    localStorage.setItem("user", JSON.stringify(userData));
+  const login = ({ name, email }) => setUser({ name, email, photo: null });
+
+  const loginWithGoogle = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+      callbackURL: "/",
+    });
   };
 
-  const logout = () => {
+  const logout = async () => {
+    await authClient.signOut();
     setUser(null);
-    localStorage.removeItem("user");
   };
+
+  if (loading) return null;
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading }}>
+    <AuthContext.Provider value={{ user, login, loginWithGoogle, logout }}>
       {children}
     </AuthContext.Provider>
   );

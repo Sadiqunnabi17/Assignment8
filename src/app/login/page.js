@@ -2,194 +2,141 @@
 
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { login } = useAuth();
+  const [loading, setLoading] = useState(false);
+  const { login, loginWithGoogle } = useAuth();
   const router = useRouter();
-  const searchParams = useSearchParams();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
-
-    // Basic validation
     if (!email || !password) {
       setError("Please fill in all fields.");
       return;
     }
+    setLoading(true);
+    try {
+      const namePart = email.split("@")[0];
+      const name = namePart
+        .replace(/[._-]/g, " ")
+        .replace(/\b\w/g, (c) => c.toUpperCase());
+      login({ name, email });
+      router.push("/");
+    } catch (err) {
+      setError("Login failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    // Get the name from email (everything before @)
-    // e.g. "john.doe@gmail.com" → "John Doe"
-    const namePart = email.split("@")[0];
-    const name = namePart
-      .replace(/[._-]/g, " ")           // replace dots/dashes with spaces
-      .replace(/\b\w/g, (c) => c.toUpperCase()); // capitalize each word
-
-    login({ name, email });
-
-    const redirect = searchParams.get("redirect");
-    router.push(redirect || "/");
+  const handleGoogle = async () => {
+    setError("");
+    try {
+      await loginWithGoogle();
+    } catch (err) {
+      setError("Google login failed. Please try again.");
+    }
   };
 
   return (
-    <div style={styles.page}>
-      <div style={styles.card}>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-violet-100 to-indigo-100 px-4">
+      <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8">
 
         {/* Header */}
-        <div style={styles.header}>
-          <div style={styles.logo}>🎓</div>
-          <h2 style={styles.title}>Welcome Back</h2>
-          <p style={styles.subtitle}>Log in to continue learning</p>
+        <div className="text-center mb-6">
+          <div className="text-5xl mb-2">🎓</div>
+          <h2 className="text-2xl font-bold text-gray-800">Welcome Back</h2>
+          <p className="text-sm text-gray-400 mt-1">Log in to continue learning</p>
         </div>
 
-        {/* Error message */}
-        {error && <p style={styles.error}>⚠️ {error}</p>}
+        {/* Error */}
+        {error && (
+          <div className="bg-red-50 text-red-500 text-sm rounded-lg px-4 py-3 mb-4">
+            ⚠️ {error}
+          </div>
+        )}
 
-        {/* Form */}
-        <form onSubmit={handleLogin} style={styles.form}>
-
-          {!email && (
-            <div className="alert alert-error mb-3">
-                Please enter email
-            </div>
-          )}
-          
-          <div style={styles.field}>
-            <label style={styles.label}>Email Address</label>
+        {/* Email/Password Form */}
+        <form onSubmit={handleLogin} className="flex flex-col gap-4">
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-semibold text-gray-700">
+              Email Address
+            </label>
             <input
               type="email"
               placeholder="you@example.com"
-              style={styles.input}
+              className="input input-bordered w-full"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
-          <div style={styles.field}>
-            <label style={styles.label}>Password</label>
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-semibold text-gray-700">
+              Password
+            </label>
             <input
               type="password"
               placeholder="Enter your password"
-              style={styles.input}
+              className="input input-bordered w-full"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 
-          <button type="submit" style={styles.button}>
-            Log In
+          <button
+            type="submit"
+            className="btn w-full mt-1 text-white font-bold text-base rounded-xl shadow-lg bg-gradient-to-r from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700 hover:-translate-y-0.5 hover:shadow-xl transition-all duration-200 border-none"
+            disabled={loading}
+          >
+            {loading ? (
+              <span className="flex items-center justify-center gap-2">
+                <span className="loading loading-spinner loading-sm"></span>
+                Logging in...
+              </span>
+            ) : (
+              <span className="flex items-center justify-center gap-2">
+                Log In
+              </span>
+            )}
           </button>
-
         </form>
 
-        {/* Footer */}
-        <p style={styles.footerText}>
+        {/* Divider */}
+        <div className="flex items-center gap-3 my-5">
+          <div className="flex-1 h-px bg-gray-200" />
+          <span className="text-xs text-gray-400 font-medium">or continue with</span>
+          <div className="flex-1 h-px bg-gray-200" />
+        </div>
+
+        {/* Google Button */}
+        <button
+          onClick={handleGoogle}
+          className="btn btn-outline w-full flex items-center justify-center gap-3"
+        >
+          <img
+            src="https://www.svgrepo.com/show/475656/google-color.svg"
+            alt="Google"
+            className="w-5 h-5"
+          />
+          Continue with Google
+        </button>
+
+        {/* Register Link */}
+        <p className="text-center text-sm text-gray-500 mt-6">
           Don't have an account?{" "}
-          <Link href="/register" style={styles.link}>Register here</Link>
+          <Link href="/register" className="text-primary font-semibold">
+            Register here
+          </Link>
         </p>
 
       </div>
     </div>
   );
 }
-
-// ---- Styles ----
-const styles = {
-  page: {
-    minHeight: "100vh",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    background: "linear-gradient(135deg, #ede9fe, #e0e7ff)",
-    padding: "1rem",
-    fontFamily: "'Segoe UI', sans-serif",
-  },
-  card: {
-    background: "white",
-    borderRadius: "16px",
-    padding: "2.5rem 2rem",
-    width: "100%",
-    maxWidth: "400px",
-    boxShadow: "0 8px 30px rgba(99,102,241,0.12)",
-  },
-  header: {
-    textAlign: "center",
-    marginBottom: "1.75rem",
-  },
-  logo: {
-    fontSize: "2.5rem",
-    marginBottom: "0.5rem",
-  },
-  title: {
-    fontSize: "1.5rem",
-    fontWeight: "700",
-    color: "#1f2937",
-    margin: "0 0 0.25rem",
-  },
-  subtitle: {
-    fontSize: "0.875rem",
-    color: "#9ca3af",
-    margin: 0,
-  },
-  error: {
-    background: "#fef2f2",
-    color: "#ef4444",
-    borderRadius: "8px",
-    padding: "0.6rem 0.85rem",
-    fontSize: "0.875rem",
-    marginBottom: "1rem",
-  },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "1rem",
-  },
-  field: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "0.35rem",
-  },
-  label: {
-    fontSize: "0.875rem",
-    fontWeight: "600",
-    color: "#374151",
-  },
-  input: {
-    padding: "0.65rem 0.9rem",
-    borderRadius: "8px",
-    border: "1.5px solid #e5e7eb",
-    fontSize: "0.95rem",
-    outline: "none",
-    transition: "border 0.2s",
-    color: "#1f2937",
-  },
-  button: {
-    marginTop: "0.5rem",
-    padding: "0.75rem",
-    background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
-    color: "white",
-    fontWeight: "700",
-    fontSize: "1rem",
-    border: "none",
-    borderRadius: "10px",
-    cursor: "pointer",
-    boxShadow: "0 4px 12px rgba(99,102,241,0.3)",
-    transition: "opacity 0.2s",
-  },
-  footerText: {
-    textAlign: "center",
-    fontSize: "0.875rem",
-    color: "#6b7280",
-    marginTop: "1.25rem",
-  },
-  link: {
-    color: "#6366f1",
-    fontWeight: "600",
-    textDecoration: "none",
-  },
-};
