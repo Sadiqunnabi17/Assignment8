@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
+import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -10,7 +11,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { login, loginWithGoogle } = useAuth();
+  const { loginWithGoogle } = useAuth();
   const router = useRouter();
 
   const handleLogin = async (e) => {
@@ -22,14 +23,14 @@ export default function LoginPage() {
     }
     setLoading(true);
     try {
-      const namePart = email.split("@")[0];
-      const name = namePart
-        .replace(/[._-]/g, " ")
-        .replace(/\b\w/g, (c) => c.toUpperCase());
-      login({ name, email });
+      const result = await authClient.signIn.email({ email, password });
+      if (result.error) {
+        setError("Invalid email or password.");
+        return;
+      }
       router.push("/");
     } catch (err) {
-      setError("Login failed. Please try again.");
+      setError("Invalid email or password.");
     } finally {
       setLoading(false);
     }
@@ -48,26 +49,21 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-violet-100 to-indigo-100 px-4">
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8">
 
-        {/* Header */}
         <div className="text-center mb-6">
           <div className="text-5xl mb-2">🎓</div>
           <h2 className="text-2xl font-bold text-gray-800">Welcome Back</h2>
           <p className="text-sm text-gray-400 mt-1">Log in to continue learning</p>
         </div>
 
-        {/* Error */}
         {error && (
           <div className="bg-red-50 text-red-500 text-sm rounded-lg px-4 py-3 mb-4">
             ⚠️ {error}
           </div>
         )}
 
-        {/* Email/Password Form */}
         <form onSubmit={handleLogin} className="flex flex-col gap-4">
           <div className="flex flex-col gap-1">
-            <label className="text-sm font-semibold text-gray-700">
-              Email Address
-            </label>
+            <label className="text-sm font-semibold text-gray-700">Email Address</label>
             <input
               type="email"
               placeholder="you@example.com"
@@ -78,9 +74,7 @@ export default function LoginPage() {
           </div>
 
           <div className="flex flex-col gap-1">
-            <label className="text-sm font-semibold text-gray-700">
-              Password
-            </label>
+            <label className="text-sm font-semibold text-gray-700">Password</label>
             <input
               type="password"
               placeholder="Enter your password"
@@ -100,22 +94,16 @@ export default function LoginPage() {
                 <span className="loading loading-spinner loading-sm"></span>
                 Logging in...
               </span>
-            ) : (
-              <span className="flex items-center justify-center gap-2">
-                Log In
-              </span>
-            )}
+            ) : "Log In"}
           </button>
         </form>
 
-        {/* Divider */}
         <div className="flex items-center gap-3 my-5">
           <div className="flex-1 h-px bg-gray-200" />
           <span className="text-xs text-gray-400 font-medium">or continue with</span>
           <div className="flex-1 h-px bg-gray-200" />
         </div>
 
-        {/* Google Button */}
         <button
           onClick={handleGoogle}
           className="btn btn-outline w-full flex items-center justify-center gap-3"
@@ -128,7 +116,6 @@ export default function LoginPage() {
           Continue with Google
         </button>
 
-        {/* Register Link */}
         <p className="text-center text-sm text-gray-500 mt-6">
           Don't have an account?{" "}
           <Link href="/register" className="text-primary font-semibold">
