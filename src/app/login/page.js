@@ -11,7 +11,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { loginWithGoogle } = useAuth();
+  const { login, loginWithGoogle } = useAuth();
   const router = useRouter();
 
   const handleLogin = async (e) => {
@@ -24,11 +24,19 @@ export default function LoginPage() {
     setLoading(true);
     try {
       const result = await authClient.signIn.email({ email, password });
-      if (result.error) {
+      if (result?.error) {
         setError("Invalid email or password.");
         return;
       }
+      // Update context with real user data
+      login({
+        name: result?.data?.user?.name,
+        email: result?.data?.user?.email,
+        photo: result?.data?.user?.image || null,
+      });
+      window.location.href = "/";
       router.push("/");
+      router.refresh();
     } catch (err) {
       setError("Invalid email or password.");
     } finally {

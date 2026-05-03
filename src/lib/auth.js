@@ -2,7 +2,10 @@ import { betterAuth } from "better-auth";
 
 export const auth = betterAuth({
   secret: process.env.BETTER_AUTH_SECRET,
-  baseURL: process.env.NEXT_PUBLIC_APP_URL,
+
+  emailAndPassword: {
+    enabled: true,
+  },
 
   socialProviders: {
     google: {
