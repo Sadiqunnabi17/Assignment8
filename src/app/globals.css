@@ -48,9 +48,7 @@ body {
   font-weight: 800;
   letter-spacing: -0.5px;
   text-decoration: none;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #6366f1;
   background-clip: text;
   white-space: nowrap;
 }
@@ -236,4 +234,18 @@ body {
   .navbar-links { display: none; }
   .hamburger { display: flex; }
   .mobile-menu { display: flex; }
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-scroll {
+  animation: scroll 20s linear infinite;
+  width: max-content;
+}
+
+.animate-scroll:hover {
+  animation-play-state: paused;
 }
