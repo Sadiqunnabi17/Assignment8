@@ -23,8 +23,8 @@ export default function Navbar() {
     <nav
       className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/98 shadow-md border-b border-gray-100"
-          : "bg-white/85 backdrop-blur-md border-b border-gray-50"
+          ? "bg-[#e8eeff] shadow-md border-b border-indigo-100"
+          : "bg-[#f0f4ff]/90 backdrop-blur-md border-b border-indigo-50"
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-4">

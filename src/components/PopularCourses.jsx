@@ -18,7 +18,7 @@ export default function PopularCourses() {
 
         <Link
           href="/courses"
-          className="text-blue-700 font-semibold px-3 py-1 rounded-md text-sm font-medium hover:bg-blue-700 hover:text-white "
+          className="text-green-700 font-semibold px-3 py-1 rounded-md text-sm font-medium hover:bg-blue-700 hover:text-white "
         >
           View More Courses
         </Link>

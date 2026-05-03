@@ -1,18 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 export default function RegisterPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [photoURL, setPhotoURL] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+  const photoRef = useRef(null);
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -64,53 +70,72 @@ export default function RegisterPage() {
 
         <form onSubmit={handleRegister} className="flex flex-col gap-4">
 
+          {/* Full Name */}
           <div className="flex flex-col gap-1">
             <label className="text-sm font-semibold text-gray-700">
-              Full Name <span className="text-red-400">*</span>
+              Name <span className="text-red-400">*</span>
             </label>
             <input
               type="text"
-              placeholder="John Doe"
-              className="input input-bordered w-full"
+              placeholder="Your Full Name"
+              className="input w-full border border-gray-300 focus:outline-none focus:border-indigo-400"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && emailRef.current?.focus()}
             />
           </div>
 
+          {/* Email */}
           <div className="flex flex-col gap-1">
             <label className="text-sm font-semibold text-gray-700">
               Email Address <span className="text-red-400">*</span>
             </label>
             <input
+              ref={emailRef}
               type="email"
               placeholder="you@example.com"
-              className="input input-bordered w-full"
+              className="input w-full border border-gray-300 focus:outline-none focus:border-indigo-400"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && passwordRef.current?.focus()}
             />
           </div>
 
+          {/* Password */}
           <div className="flex flex-col gap-1">
             <label className="text-sm font-semibold text-gray-700">
               Password <span className="text-red-400">*</span>
             </label>
-            <input
-              type="password"
-              placeholder="At least 6 characters"
-              className="input input-bordered w-full"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <div className="relative">
+              <input
+                ref={passwordRef}
+                type={showPassword ? "text" : "password"}
+                placeholder="At least 8 characters"
+                className="input w-full border border-gray-300 focus:outline-none focus:border-indigo-400 pr-10"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && photoRef.current?.focus()}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-indigo-500 transition-colors bg-transparent border-none cursor-pointer"
+              >
+                {showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
+              </button>
+            </div>
           </div>
 
+          {/* Photo URL */}
           <div className="flex flex-col gap-1">
             <label className="text-sm font-semibold text-gray-700">
               Photo URL <span className="text-gray-400 font-normal">(optional)</span>
             </label>
             <input
+              ref={photoRef}
               type="url"
               placeholder="https://example.com/your-photo.jpg"
-              className="input input-bordered w-full"
+              className="input w-full border border-gray-300 focus:outline-none focus:border-indigo-400"
               value={photoURL}
               onChange={(e) => setPhotoURL(e.target.value)}
             />

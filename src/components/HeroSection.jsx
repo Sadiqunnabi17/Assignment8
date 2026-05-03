@@ -14,36 +14,36 @@ export default function HeroSection() {
         <div className="flex-1 max-w-xl text-center lg:text-left">
 
           {/* Badge */}
-          <div className="inline-flex items-center gap-1 bg-white text-indigo-500 text-xs font-bold px-4 py-1.5 rounded-full border border-indigo-200 shadow-sm mb-5 tracking-wide">
+          <div className="inline-flex items-center gap-1 bg-yellow-100 text-indigo-500 text-xs font-bold px-4 py-1.5 rounded-full border border-indigo-200 shadow-sm mb-5 tracking-wide">
             #1 Platform for Skill Growth
           </div>
 
           {/* Title */}
-          <h1 className="text-4xl lg:text-5xl font-extrabold text-indigo-950 leading-tight mb-5 tracking-tight">
+          <h1 className="text-3xl lg:text-4xl font-bold text-indigo-800 leading-tight mb-5 tracking-tight">
             Upgrade Your Skills <br />
-            <span className="bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
               Today & Tomorrow
             </span>
           </h1>
 
           {/* Description */}
-          <p className="text-lg text-gray-500 leading-relaxed mb-4 max-w-lg mx-auto lg:mx-0">
+          <p className="text-lg text-gray-600 leading-relaxed mb-4 max-w-lg mx-auto lg:mx-0">
             Learn from industry experts and master real-world skills
             at your own pace — from beginner to professional.
           </p>
 
           {/* Tags */}
           <div className="flex flex-wrap gap-2 mb-8 justify-center lg:justify-start">
-            <span className="bg-white text-indigo-500 text-xs font-semibold px-3 py-1.5 rounded-full border border-indigo-100">
+            <span className="bg-purple-200 text-indigo-500 text-xs font-semibold px-3 py-1.5 rounded-full border border-indigo-100">
               💻 Web Development
             </span>
-            <span className="bg-white text-indigo-500 text-xs font-semibold px-3 py-1.5 rounded-full border border-indigo-100">
+            <span className="bg-green-200 text-indigo-500 text-xs font-semibold px-3 py-1.5 rounded-full border border-indigo-100">
               🎨 UI/UX Design
             </span>
-            <span className="bg-white text-indigo-500 text-xs font-semibold px-3 py-1.5 rounded-full border border-indigo-100">
+            <span className="bg-blue-200 text-indigo-500 text-xs font-semibold px-3 py-1.5 rounded-full border border-indigo-100">
               📈 Marketing
             </span>
-            <span className="bg-white text-indigo-500 text-xs font-semibold px-3 py-1.5 rounded-full border border-indigo-100">
+            <span className="bg-green-200 text-indigo-500 text-xs font-semibold px-3 py-1.5 rounded-full border border-indigo-100">
               + More
             </span>
           </div>

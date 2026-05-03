@@ -6,91 +6,43 @@ export default function StatsSection() {
     { icon: "📚", number: "200+",    label: "Courses Available" },
     { icon: "👨‍🏫", number: "50+",     label: "Expert Instructors" },
     { icon: "⭐", number: "4.9/5",   label: "Average Rating" },
-    { icon: "🌍", number: "30+",     label: "Countries Reached" },
   ];
 
   return (
-    <>
-      <style>{`
-        .stats-section {
-          background: white;
-          border-top: 1px solid #f3f4f6;
-          border-bottom: 1px solid #f3f4f6;
-          padding: 3rem 1.5rem;
-          font-family: 'Segoe UI', sans-serif;
-        }
+    <section className="py-12 px-6 border-t border-b border-indigo-100"
+      style={{ background: "linear-gradient(135deg, #eef2ff, #f5f3ff)" }}
+    >
+      <div className="max-w-5xl mx-auto flex flex-wrap justify-center items-center gap-6">
+        {stats.map((stat, index) => (
+          <Fragment key={stat.label}>
 
-        .stats-inner {
-          max-width: 1200px;
-          margin: 0 auto;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          flex-wrap: wrap;
-          gap: 2rem;
-        }
-
-        .stat-item {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-          flex: 1;
-          min-width: 140px;
-        }
-
-        .stat-icon {
-          font-size: 1.75rem;
-          margin-bottom: 0.5rem;
-        }
-
-        .stat-number {
-          font-size: 1.75rem;
-          font-weight: 800;
-          color: #1e1b4b;
-          line-height: 1;
-          margin-bottom: 0.35rem;
-        }
-
-        .stat-label {
-          font-size: 0.875rem;
-          color: #9ca3af;
-          font-weight: 500;
-        }
-
-        /* Divider between items */
-        .stat-divider {
-          width: 1px;
-          height: 48px;
-          background: #f3f4f6;
-          flex-shrink: 0;
-        }
-
-        @media (max-width: 768px) {
-          .stat-divider { display: none; }
-          .stats-inner { justify-content: center; }
-          .stat-item { min-width: 120px; }
-        }
-      `}</style>
-
-      <section className="stats-section">
-        <div className="stats-inner">
-          {stats.map((stat, index) => (
-            <Fragment key={stat.label}>
-              <div className="stat-item" key={stat.label}>
-                <div className="stat-icon">{stat.icon}</div>
-                <div className="stat-number">{stat.number}</div>
-                <div className="stat-label">{stat.label}</div>
+            {/* Stat item */}
+            <div className="flex flex-col items-center text-center flex-1 min-w-[130px]">
+              <div className="text-3xl mb-2">{stat.icon}</div>
+              <div
+                className="text-2xl font-extrabold mb-1"
+                style={{
+                  background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                {stat.number}
               </div>
+              <div className="text-sm text-gray-500 font-medium">
+                {stat.label}
+              </div>
+            </div>
 
-              {/* Divider between items, not after last */}
-              {index < stats.length - 1 && (
-                <div className="stat-divider" key={`divider-${index}`} />
-              )}
-            </Fragment>
-          ))}
-        </div>
-      </section>
-    </>
+            {/* Divider — hidden on mobile */}
+            {index < stats.length - 1 && (
+              <div className="hidden md:block w-px h-12 bg-indigo-100" />
+            )}
+
+          </Fragment>
+        ))}
+      </div>
+    </section>
   );
 }
