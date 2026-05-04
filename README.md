@@ -1,36 +1,141 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🎓 SkillSphere – Learning Platform
 
-## Getting Started
+SkillSphere is a modern online learning platform where users can explore courses, authenticate securely, and enhance their skills through a clean and interactive UI.
 
-First, run the development server:
+---
+
+## 🚀 Live Site
+
+👉 [Live Link Here](#) *(replace with your deployed link)*
+
+---
+
+## 📌 Features
+
+* 🔐 **Authentication System**
+
+  * Google Login (OAuth)
+  * Email & Password Login (UI-based)
+  * Protected Routes
+
+* 👤 **User Profile**
+
+  * Displays logged-in user info
+  * Profile update support
+
+* 📚 **Course System**
+
+  * Popular Courses section
+  * 🔥 Trending AI Courses (custom animated section)
+  * Reusable course components
+
+* 🎨 **Modern UI/UX**
+
+  * Responsive design (mobile + desktop)
+  * Tailwind CSS styling
+  * Interactive hover effects
+
+* 🎞 **Bonus Features**
+
+  * Animated Trending Courses (right-to-left motion)
+  * Toast notifications for actions
+
+---
+
+## 🧠 Tech Stack
+
+* **Frontend:** Next.js (App Router)
+* **Styling:** Tailwind CSS
+* **Authentication:** Better Auth + Google OAuth
+* **State Management:** React Context API
+* **Deployment:** *(Netlify / Vercel — replace accordingly)*
+
+---
+
+## 📂 Project Structure
+
+```
+src/
+ ├── app/
+ │   ├── page.js
+ │   ├── login/
+ │   ├── register/
+ │   └── api/
+ ├── components/
+ │   ├── HeroSection.jsx
+ │   ├── PopularCourses.jsx
+ │   ├── TrendingCourses.jsx
+ │   ├── Navbar.jsx
+ │   └── ...
+ ├── data/
+ │   └── courses.json
+ └── context/
+     └── AuthContext.jsx
+```
+
+---
+
+## ⚙️ Installation & Setup
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Sadiqunnabi17/Assignment8.git
+cd skillsphere
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run locally:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 🔑 Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a `.env.local` file in the root:
 
-## Learn More
+```
+NEXT_PUBLIC_APP_URL=http://localhost:3000
 
-To learn more about Next.js, take a look at the following resources:
+GOOGLE_CLIENT_ID=your_client_id
+GOOGLE_CLIENT_SECRET=your_client_secret
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ⚠️ Notes
 
-## Deploy on Vercel
+* MongoDB integration is planned for future enhancement.
+* Authentication currently works using Google OAuth and local state.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 👨‍💻 Author
+
+**Mohd Sadiqunnabi**
+EcoSpace
+
+---
+
+## 📌 Future Improvements
+
+* Full database integration (MongoDB)
+* Course enrollment system
+* Dashboard for users
+* Payment integration
+
+---
+
+## ⭐ Acknowledgement
+
+This project was developed as part of an academic assignment.
+
+---
