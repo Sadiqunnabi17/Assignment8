@@ -14,7 +14,7 @@ export default function ProfilePage() {
     if (!loading && !user) router.push("/login?redirect=/profile");
   }, [user, loading, router]);
 
-  // ✅ Wait for auth to load before rendering anything
+  // Wait for auth to load before rendering anything
   if (loading || !user) return null;
 
   const initials = user.name
@@ -67,14 +67,14 @@ export default function ProfilePage() {
               href="/profile/update"
               className="inline-flex items-center gap-2 px-5 py-2 text-sm font-bold text-indigo-500 border border-indigo-400 rounded-xl hover:bg-indigo-500 hover:text-white transition-all no-underline"
             >
-              ✏️ Update Profile
+              Update Profile
             </Link>
             <button
               onClick={() => { logout(); router.push("/"); }}
               className="inline-flex items-center gap-2 px-5 py-2 text-sm font-bold text-white rounded-xl border-none cursor-pointer transition-all hover:-translate-y-0.5"
               style={{ background: "linear-gradient(135deg, #6366f1, #8b5cf6)" }}
             >
-              🚪 Logout
+              Logout
             </button>
           </div>
 
