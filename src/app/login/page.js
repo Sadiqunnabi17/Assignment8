@@ -13,7 +13,7 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { login, loginWithGoogle } = useAuth();
+  const { login, loginWithGoogle, authLoading } = useAuth();
   const router = useRouter();
 
   const passwordRef = useRef(null);
@@ -37,7 +37,8 @@ export default function LoginPage() {
         email: result?.data?.user?.email,
         photo: result?.data?.user?.image || null,
       });
-      window.location.href = "/";
+      router.push("/");
+      router.refresh();
     } catch (err) {
       setError("Invalid email or password.");
     } finally {
@@ -139,13 +140,18 @@ export default function LoginPage() {
         {/* Google */}
         <button
           onClick={handleGoogle}
+          disabled={authLoading}
           className="btn btn-outline w-full flex items-center justify-center gap-3"
         >
-          <img
-            src="https://www.svgrepo.com/show/475656/google-color.svg"
-            alt="Google"
-            className="w-5 h-5"
-          />
+          {authLoading ? (
+            <span className="loading loading-spinner loading-sm" />
+          ) : (
+            <img
+              src="https://www.svgrepo.com/show/475656/google-color.svg"
+              alt="Google"
+              className="w-5 h-5"
+            />
+          )}
           Continue with Google
         </button>
 

@@ -7,20 +7,20 @@ import Link from "next/link";
 import courses from "@/data/courses.json";
 
 export default function ProfilePage() {
-  const { user, logout } = useAuth();
+  const { user, logout, loading } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (!user) router.push("/login?redirect=/profile");
-  }, [user, router]);
+    if (!loading && !user) router.push("/login?redirect=/profile");
+  }, [user, loading, router]);
 
-  if (!user) return null;
+  // ✅ Wait for auth to load before rendering anything
+  if (loading || !user) return null;
 
   const initials = user.name
     ? user.name.split(" ").map((n) => n[0]).join("").toUpperCase()
     : user.email?.charAt(0).toUpperCase();
 
-  // Show top 3 courses as "enrolled" for demo
   const enrolledCourses = courses.slice(0, 3);
 
   return (

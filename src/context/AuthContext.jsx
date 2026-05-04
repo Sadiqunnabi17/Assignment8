@@ -8,6 +8,7 @@ const AuthContext = createContext(null);
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [authLoading, setAuthLoading] = useState(false);
 
   const fetchSession = async () => {
     try {
@@ -34,7 +35,6 @@ export function AuthProvider({ children }) {
 
   const login = ({ name, email, photo = null }) => {
     setUser({ name, email, photo });
-    fetchSession(); // ← re-fetch real session after login
   };
 
   const updateUser = ({ name, email, photo }) =>
@@ -46,21 +46,32 @@ export function AuthProvider({ children }) {
     }));
 
   const loginWithGoogle = async () => {
+    setAuthLoading(true);
     await authClient.signIn.social({
       provider: "google",
       callbackURL: "/",
     });
+    setAuthLoading(false);
   };
 
   const logout = async () => {
+    setAuthLoading(true);
     await authClient.signOut();
     setUser(null);
+    setAuthLoading(false);
   };
 
-  if (loading) return null;
+  // Don't render children until session is checked
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-violet-50 to-indigo-100">
+        <div className="w-14 h-14 rounded-full border-4 border-indigo-100 border-t-indigo-500 animate-spin" />
+      </div>
+    );
+  }
 
   return (
-    <AuthContext.Provider value={{ user, login, updateUser, loginWithGoogle, logout, loading }}>
+    <AuthContext.Provider value={{ user, login, updateUser, loginWithGoogle, logout, loading, authLoading }}>
       {children}
     </AuthContext.Provider>
   );

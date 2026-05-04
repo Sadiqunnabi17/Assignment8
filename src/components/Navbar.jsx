@@ -5,7 +5,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useState, useEffect } from "react";
 
 export default function Navbar() {
-  const { user, logout } = useAuth();
+  const { user, logout, authLoading } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -92,10 +92,15 @@ export default function Navbar() {
               {/* Logout button */}
               <button
                 onClick={logout}
+                disabled={authLoading}
                 className="text-sm font-semibold text-white px-4 py-1.5 rounded-lg border-none cursor-pointer transition-all hover:-translate-y-0.5"
                 style={{ background: "linear-gradient(135deg, #6366f1, #8b5cf6)" }}
               >
-                Logout
+                {authLoading ? (
+                  <span className="loading loading-spinner loading-sm" />
+                ) : (
+                  "Logout"
+                )}
               </button>
 
             </div>
