@@ -50,6 +50,10 @@ export function AuthProvider({ children }) {
     await authClient.signIn.social({
       provider: "google",
       callbackURL: "/",
+      params: {
+        prompt: "select_account", // ← forces account picker every time
+      },
+
     });
     setAuthLoading(false);
   };
