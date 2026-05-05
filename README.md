@@ -6,7 +6,7 @@ SkillSphere is a modern online learning platform where users can explore courses
 
 ## 🚀 Live Site
 
-👉 [Live Link Here](#) *(replace with your deployed link)*
+👉 https://skillsphere-two-ruby.vercel.app
 
 ---
 
