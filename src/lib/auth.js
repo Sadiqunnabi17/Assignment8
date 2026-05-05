@@ -1,24 +1,18 @@
 import { betterAuth } from "better-auth";
-import Database from "better-sqlite3";
 import { MongoClient } from "mongodb";
-//import { mongodbAdapter } from "better-auth/adapters/mongodb";
+import { mongodbAdapter } from "better-auth/adapters/mongodb";
 
-const isProd = process.env.NODE_ENV === "production";
+const client = new MongoClient(process.env.MONGO_URI, {
+  serverSelectionTimeoutMS: 5000,
+  connectTimeoutMS: 5000,
+});
 
-let database;
-
-if (isProd) {
-  // const client = new MongoClient(process.env.MONGO_URI);
-  // await client.connect();
-  const db = client.db("skillsphere");
-  database = mongodbAdapter(db, { client });
-} else {
-  database = new Database("./database.db");
-}
+await client.connect();
+const db = client.db("skillsphere");
 
 export const auth = betterAuth({
   secret: process.env.BETTER_AUTH_SECRET,
-  database,
+  database: mongodbAdapter(db, { client }),
   emailAndPassword: { enabled: true },
   socialProviders: {
     google: {
